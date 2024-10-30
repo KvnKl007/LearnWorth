@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUpload } from 'react-icons/fa'; // Font Awesome for the upload icon
+import { TiCloudStorage } from "react-icons/ti"; // Font Awesome for the upload icon
 
 const FileUploadButton = ({ onFileChange }) => {
     const handleFileInputChange = (e) => {
@@ -21,7 +21,7 @@ const FileUploadButton = ({ onFileChange }) => {
                 htmlFor="file-upload"
                 className="flex items-center px-2 py-1 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600"
             >
-                <FaUpload className="mr-2" /> {/* Upload icon */}
+                <TiCloudStorage className="mr-2 size-7" /> {/* Upload icon */}
                 Upload file
             </label>
         </div>

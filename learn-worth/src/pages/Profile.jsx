@@ -108,11 +108,10 @@ const Profile = () => {
     };
 
     return (
-        <div>
+        <>
             <Navbar />
             <div className='flex-col '>
-                <div className=''><ul><li>User Profile manage</li></ul></div>
-                <div className="flex flex-col items-center p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md mt-10">
+                <div className="flex flex-col items-center p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md mt-28">
                     <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
 
                     {error && <p className="text-red-500">{error}</p>}
@@ -201,7 +200,7 @@ const Profile = () => {
                     </form>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

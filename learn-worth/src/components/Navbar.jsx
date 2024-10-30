@@ -6,7 +6,7 @@ const Navbar = () => {
     const { currentUser } = useAuth(); // Get user
 
     return (
-        <nav className="bg-white shadow-lg">
+        <nav className="bg-white shadow-lg fixed w-full z-50 top-0">
             <div className="container mx-auto px-4 flex justify-between items-center py-3">
                 {/* Logo */}
                 <div className="text-blue-600 text-2xl font-bold">
@@ -15,9 +15,10 @@ const Navbar = () => {
 
                 {/* Nav Menu */}
                 <ul className="hidden md:flex space-x-8 text-gray-600 font-medium">
-                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/about">About us</Link></li>
                     <li><Link to="/courses">Courses</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
+                    <li><Link to="/quiz">Quizes</Link></li>
+                    <li><Link to="/flash-cards">Flash cards</Link></li>
                 </ul>
 
                 {/* Right Side (Buttons or Profile) */}
@@ -25,7 +26,7 @@ const Navbar = () => {
                     {currentUser ? (
                         // Show user profile if signed in
                         <>
-                            <Link to="/profile" className="text-gray-600 font-medium">
+                            <Link to="/profile" className="text-gray-600 font-medium flex items-center gap-3">
                                 <img src={currentUser.photoURL} alt="profile" className="h-10 w-10 rounded-full object-cover" />
                             </Link>
 
