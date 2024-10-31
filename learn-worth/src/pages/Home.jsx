@@ -4,6 +4,9 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import StudyMaterialCard from '../components/CourseCard/StudyMaterial';
 import courseData from '../assets/Data/CourseData';
+import AboutUs from '../components/About';
+import features from '../assets/Data/FeaturesData';
+import Footer from '../components/Footer';
 
 const Home = () => {
     // Display only the first 3 courses as featured courses
@@ -11,7 +14,7 @@ const Home = () => {
     return (
         <>
             <Navbar />
-            {/* hero section */}
+            {/* home section */}
             <div className="flex flex-col items-center py-20 px-4 md:p-10 bg-white">
                 <Hero />
                 {/* float at the bottom of hero section */}
@@ -25,8 +28,10 @@ const Home = () => {
                     </Link>
                 </section>
 
+                <AboutUs />
+
                 {/* Featured Study Materials */}
-                <section className="w-full max-w-4xl">
+                <section className="w-full max-w-4xl mt-16">
                     <h2 className="text-2xl font-bold mb-4 text-gray-700">Featured Study Materials</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {/* Sample Card */}
@@ -36,13 +41,27 @@ const Home = () => {
                                 thumbnail={course.thumbnail}
                                 title={course.title}
                                 description={course.description}
-                                link={course.link} />
+                                link={`/courses/${course.id}`}
+                            />
                         ))}
 
                         {/* Repeat for more cards */}
                     </div>
                 </section>
+                {/* Features Showcase */}
+                <section className="w-full bg-gray-50 py-12 mt-20">
+                    <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                        {features.map((feature, index) => (
+                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden p-6 transition transform hover:scale-105 hover:shadow-xl">
+                                <img src={feature.icon} alt={feature.title} className="h-16 w-16 mx-auto mb-4" />
+                                <h4 className="text-xl font-semibold text-blue-600 mb-2 text-center">{feature.title}</h4>
+                                <p className="text-gray-600 text-center">{feature.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
             </div>
+            <Footer />
         </>
 
     );

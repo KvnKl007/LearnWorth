@@ -9,6 +9,7 @@ import {
 import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { auth, storage } from '../firebaseConfig';
 import Navbar from '../components/Navbar';
+import defaultImage from "../assets/images/default.png"
 import { useNavigate } from 'react-router-dom';
 import FileUploadButton from '../components/UploadBtn';
 
@@ -22,11 +23,13 @@ const Profile = () => {
     const [success, setSuccess] = useState('');
     const [imagePercent, setImagePercent] = useState(0);
     const [profilePic, setProfilePic] = useState(null);
-    const [profilePicUrl, setProfilePicUrl] = useState(currentUser?.photoURL || '');
+    const [profilePicUrl, setProfilePicUrl] = useState(currentUser?.photoURL || defaultImage);
 
     useEffect(() => {
         if (currentUser?.photoURL) {
             setProfilePicUrl(currentUser.photoURL);
+        } else {
+            setProfilePicUrl(defaultImage);
         }
     }, [currentUser]);
 
@@ -110,7 +113,7 @@ const Profile = () => {
     return (
         <>
             <Navbar />
-            <div className='flex-col '>
+            <div className='flex-col mb-10'>
                 <div className="flex flex-col items-center p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md mt-28">
                     <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
 

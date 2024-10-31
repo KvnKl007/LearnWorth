@@ -78,9 +78,9 @@ const Register = () => {
             {/* Right Side - Image */}
             <div className="hidden md:flex md:w-3/4 flex-1 items-center justify-center bg-blue-600">
                 <img
-                    src="/src/assets/images/signup.jpg"
+                    src="/src/assets/images/students.jpg"
                     alt="Showcase of LearnWorth"
-                    className="w-full h-full"
+                    className="w-full h-full object-cover"
                 />
             </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx'; // Assuming you have an auth context for user state
+import { useAuth } from '../context/AuthContext.jsx';
+import defaultImage from "../assets/images/default.png"
 
 const Navbar = () => {
     const { currentUser } = useAuth(); // Get user
@@ -15,10 +16,10 @@ const Navbar = () => {
 
                 {/* Nav Menu */}
                 <ul className="hidden md:flex space-x-8 text-gray-600 font-medium">
-                    <li><Link to="/about">About us</Link></li>
-                    <li><Link to="/courses">Courses</Link></li>
-                    <li><Link to="/quiz">Quizes</Link></li>
-                    <li><Link to="/flash-cards">Flash cards</Link></li>
+                    <li><Link to="/courses" className=' hover:text-blue-600'>Courses</Link></li>
+                    <li><Link to="/quizzes" className=' hover:text-blue-600'>Quizes</Link></li>
+                    <li><Link to="/flash-cards" className=' hover:text-blue-600'>Flash cards</Link></li>
+                    <li><Link to="/aboutus" className=' hover:text-blue-600'>About us</Link></li>
                 </ul>
 
                 {/* Right Side (Buttons or Profile) */}
@@ -27,7 +28,7 @@ const Navbar = () => {
                         // Show user profile if signed in
                         <>
                             <Link to="/profile" className="text-gray-600 font-medium flex items-center gap-3">
-                                <img src={currentUser.photoURL} alt="profile" className="h-10 w-10 rounded-full object-cover" />
+                                <img src={currentUser.photoURL || defaultImage} alt="profile" className="h-10 w-10 rounded-full object-cover" />
                             </Link>
 
                         </>

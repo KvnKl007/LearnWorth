@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import StudyMaterialCard from '../components/CourseCard/StudyMaterial';
 import Navbar from '../components/Navbar';
 import courseData from '../assets/Data/CourseData';
+import Footer from '../components/Footer';
 
 const categories = ['All', 'Mathematics', 'Science', 'Computer Science'];
 
@@ -37,7 +38,7 @@ const CoursesPage = () => {
                     </div>
 
                     {/* Category Filter */}
-                    <div className="flex justify-start space-x-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2">
                         {categories.map(category => (
                             <button
                                 key={category}
@@ -60,7 +61,7 @@ const CoursesPage = () => {
                                 thumbnail={course.thumbnail}
                                 title={course.title}
                                 description={course.description}
-                                link={course.link}
+                                link={`/courses/${course.id}`}
                             />
                         ))
                     ) : (
@@ -68,6 +69,7 @@ const CoursesPage = () => {
                     )}
                 </div>
             </section>
+            <Footer />
         </>
     );
 };
