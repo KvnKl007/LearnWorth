@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <>
             <footer className="bg-gray-900 text-gray-300 py-10 relative">
-                <div className="container md:flex justify-evenly flex px-5">
+                <div className="container md:flex justify-evenly px-5">
 
                     {/* About Us Section */}
                     <div>
