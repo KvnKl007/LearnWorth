@@ -1,5 +1,5 @@
 // CoursesPage.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import StudyMaterialCard from '../components/CourseCard/StudyMaterial';
 import Navbar from '../components/Navbar';
 import courseData from '../assets/Data/CourseData';

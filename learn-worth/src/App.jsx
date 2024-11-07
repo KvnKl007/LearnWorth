@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/courses" element={<CoursesPage />} />
-        <Route path="/aboutus" element={<AboutUsPage />} />
+        <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/quizzes" element={<QuizPage />} />
         <Route path="/flash-cards" element={<FlashcardTopicsPage />} />
         <Route path="/flashcards/:category/:topic" element={<FlashcardViewPage />} />

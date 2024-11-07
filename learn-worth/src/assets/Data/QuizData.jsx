@@ -15,14 +15,14 @@ const quizQuestionsData = {
     { id: 4, question: "What is diversification?", options: ["Investing in multiple assets", "Selling all assets", "Investing in one company"], answer: "Investing in multiple assets" },
     { id: 5, question: "Why are bonds considered safer than stocks?", options: ["They are loans to government or corporations", "They always yield high returns", "They have no risk"], answer: "They are loans to government or corporations" }
   ],
-  2: [
+  7: [
     { id: 1, question: "What does APR stand for?", options: ["Annual Percentage Rate", "Average Pay Rate", "Accumulated Personal Revenue"], answer: "Annual Percentage Rate" },
     { id: 2, question: "Which is a credit score range?", options: ["300-850", "1-100", "5000-10000"], answer: "300-850" },
     { id: 3, question: "What does credit utilization mean?", options: ["Using credit responsibly", "The percentage of credit limit used", "Interest on loans"], answer: "The percentage of credit limit used" },
     { id: 4, question: "How often should you check your credit report?", options: ["Annually", "Monthly", "Weekly"], answer: "Annually" },
     { id: 5, question: "Why is paying the minimum balance on credit cards not ideal?", options: ["It increases interest costs", "It avoids credit limit", "It reduces credit score"], answer: "It increases interest costs" }
   ],
-  1: [
+  0: [
     { id: 1, question: "What is an emergency fund?", options: ["Savings for unexpected expenses", "Investment in stocks", "Regular savings"], answer: "Savings for unexpected expenses" },
     { id: 2, question: "Which is the rule of thumb for emergency savings?", options: ["3-6 months of expenses", "1 month of expenses", "1 year of expenses"], answer: "3-6 months of expenses" },
     { id: 3, question: "What type of account is best for emergency funds?", options: ["Savings account", "Investment account", "Checking account"], answer: "Savings account" },

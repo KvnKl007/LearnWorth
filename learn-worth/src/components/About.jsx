@@ -23,7 +23,7 @@ const AboutUs = () => {
                     <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                         Welcome to <span className="font-semibold text-blue-600">LearnWorth</span> — an online educational platform dedicated to improving financial literacy across Rwanda. Our mission is to provide free, accessible resources that empower students to make informed financial decisions and build a foundation for financial success.
                     </p>
-                    <Link to='/aboutus' >
+                    <Link to='/about-us' >
                         <button className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-500 transition">
                             Learn More
                         </button>

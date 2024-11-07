@@ -1,8 +1,7 @@
-// src/components/Footer.jsx
-
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -22,11 +21,21 @@ const Footer = () => {
                     <div>
                         <h2 className="text-white font-bold text-base mb-4">Quick Links</h2>
                         <ul>
-                            <li><a href="/" className="hover:text-white">Home</a></li>
-                            <li><a href="/courses" className="hover:text-white">Courses</a></li>
-                            <li><a href="/quizzes" className="hover:text-white">Quizzes</a></li>
-                            <li><a href="/flashcards" className="hover:text-white">Flashcards</a></li>
-                            <li><a href="/contact" className="hover:text-white">Contact Us</a></li>
+                            <Link to='/' >
+                            <li className="hover:text-white">Home</li>
+                            </Link>
+                            <Link to='/courses' >
+                            <li className="hover:text-white">Courses</li>
+                            </Link>
+                            <Link to='/quizzes' >
+                            <li className="hover:text-white">Quizzes</li>
+                            </Link>
+                            <Link to='/flash-cards' >
+                            <li className="hover:text-white">Flashcards</li>
+                            </Link>
+                            <Link to='/about-us' >
+                            <li className="hover:text-white">About Us</li>
+                            </Link>
                         </ul>
                     </div>
 
@@ -35,7 +44,7 @@ const Footer = () => {
                         <h2 className="text-white font-bold text-lg mb-4">Contact Us</h2>
                         <p><strong>Email:</strong> support@learnworth.com</p>
                         <p><strong>Phone:</strong> +123 456 7890</p>
-                        <p><strong>Address:</strong> 123 Learning St, Knowledge City</p>
+                        <p><strong>Address:</strong> 123 Bumbogo St, Kigali City</p>
                     </div>
 
                     {/* Social Media Links */}

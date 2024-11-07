@@ -21,7 +21,7 @@ const Home = () => {
                 <section className="text-center bg-blue-600 text-white p-8 rounded-lg w-full max-w-3xl mb-8 shadow-md">
                     <h1 className="text-4xl font-bold mb-4">Welcome to LearnWorth</h1>
                     <p className="mb-6">Discover a wealth of study materials and take your learning to the next level!</p>
-                    <Link to="/register">
+                    <Link to="/courses">
                         <button className="bg-white text-blue-600 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100 transition">
                             Get Started
                         </button>
