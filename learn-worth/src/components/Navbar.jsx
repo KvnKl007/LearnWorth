@@ -64,12 +64,12 @@ const Navbar = () => {
                     ) : (
                         // Show login and signup if not signed in
                         <>
-                            <Link to="/login" className="text-gray-600 font-medium">
+                            <Link to="/login" className="hover:text-white hover:bg-blue-600 text-blue-600 font-medium border-2 border-blue-600 px-4 py-1 rounded-md transition">
                                 Login
                             </Link>
                             <Link
                                 to="/register"
-                                className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-500 transition"
+                                className="px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-500 transition translate-x-1"
                             >
                                 Sign Up
                             </Link>
