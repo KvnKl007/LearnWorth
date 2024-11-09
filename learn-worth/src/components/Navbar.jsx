@@ -16,13 +16,13 @@ const Navbar = () => {
     return (
         <nav className="bg-white shadow-lg flex p-2 fixed w-full z-50 top-0">
             {/* bar menu icon */}
-            <FontAwesomeIcon 
-                icon={faBarsStaggered} 
-                size='2x' 
-                className='text-blue-600 items-center md:hidden relative top-4' 
+            <FontAwesomeIcon
+                icon={faBarsStaggered}
+                size='2x'
+                className='text-blue-600 items-center md:hidden relative top-4'
                 onClick={toggleSideMenu} // Add click handler for side menu
             />
-            <div className="container mx-auto px-4 flex justify-between items-center py-3">    
+            <div className="container mx-auto px-4 flex justify-between items-center py-3">
                 {/* Logo */}
                 <div className="text-blue-600 text-2xl font-bold">
                     <Link to="/">LearnWorth</Link>
@@ -39,7 +39,7 @@ const Navbar = () => {
                 {/* Side Menu for sm screens */}
                 {isSideMenuOpen && ( // Conditionally render side menu
                     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-40" onClick={toggleSideMenu}>
-                        <div className="fixed left-0 top-0 w-64 h-full bg-white shadow-lg z-50 p-4"> 
+                        <div className="fixed left-0 top-0 w-64 h-full bg-white shadow-lg z-50 p-4">
                             <h2 className='text-blue-600 text-2xl font-bold'>LearnWorth</h2>
                             <ul className="space-y-9 relative top-10">
                                 <li><Link to="/courses" className='hover:text-blue-600' onClick={toggleSideMenu}>Courses</Link></li>
@@ -64,7 +64,7 @@ const Navbar = () => {
                     ) : (
                         // Show login and signup if not signed in
                         <>
-                            <Link to="/login" className="hover:text-white hover:bg-blue-600 text-blue-600 font-medium border-2 border-blue-600 px-4 py-1 rounded-md transition">
+                            <Link to="/login" className="hover:text-blue-600 font-medium hover:border-2 hover:border-blue-600 px-4 py-2 rounded-md transition translate-x-1">
                                 Login
                             </Link>
                             <Link
