@@ -1,13 +1,13 @@
 import React from 'react'
-import heroImg from "../assets/images/hero.png"
-import heroImgback from "../assets/images/backhero.png"
+import heroImg from "../../public/assets/images/hero.png"
+import heroImgback from "../../public/assets/images/backhero.png"
 
 
 const Hero = () => {
     return (
         <>
             <section className='py-10 h-[150vh] md:h-full w-full'>
-                <div className='container mx-auto md:flex-nowrap flex-wrap flex items-center justify-between'>
+                <div className='container mx-auto md:flex-nowrap flex-wrap flex items-center justify-between p-5'>
                     <div className='left w-full md:w-3/4 text-gray-700 mb-8 md:mb-0'>
                         <h1 className='text-5xl leading-tight text-blue-600 font-semibold'>
                             Master New Skills <br /> Your Way <br /> Anytime, Anywhere.

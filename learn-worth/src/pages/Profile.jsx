@@ -9,7 +9,7 @@ import {
 import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../firebaseConfig';
 import Navbar from '../components/Navbar';
-import defaultImage from "../assets/images/default.png"
+import defaultImage from "../../public/assets/images/default.png"
 import { useNavigate } from 'react-router-dom';
 import FileUploadButton from '../components/UploadBtn';
 

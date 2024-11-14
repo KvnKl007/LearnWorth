@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-import defaultImage from "../assets/images/default.png"
+import defaultImage from "../../public/assets/images/default.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 

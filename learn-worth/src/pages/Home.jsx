@@ -7,7 +7,7 @@ import AboutUs from '../components/About';
 import Footer from '../components/Footer';
 import { database } from '../firebaseConfig'; // Import Firebase config
 import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
-import features from '../assets/Data/FeaturesData';
+import features from '../../public/assets/Data/FeaturesData';
 
 const Home = () => {
     const [featuredCourses, setFeaturedCourses] = useState([]);

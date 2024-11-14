@@ -65,10 +65,10 @@ const Footer = () => {
                                 <FontAwesomeIcon icon={faLinkedinIn} size="2x" />
                             </a>
                         </div>
-                    </div>
-                    <Link to={isAdmin ? '/admin' : '/login'} className='text-gray-400 hover:text-white'>
-                        Admin
-                    </Link>
+                        <Link to={isAdmin ? '/admin' : '/login'} className='text-gray-400 hover:text-white mt-5 relative flex'>
+                            Admin
+                        </Link>
+                    </div>    
                 </div>
 
                 {/* Bottom Line */}

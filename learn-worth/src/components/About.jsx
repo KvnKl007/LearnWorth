@@ -1,5 +1,5 @@
 import React from 'react';
-import aboutImage from '../assets/images/about.jpg'; // Replace with the path to your about us image
+import aboutImage from '../../public/assets/images/about.jpg'; // Replace with the path to your about us image
 import { Link } from 'react-router-dom';
 
 const AboutUs = () => {

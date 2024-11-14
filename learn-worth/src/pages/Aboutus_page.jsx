@@ -1,7 +1,7 @@
 
 import Navbar from '../components/Navbar';
-import aboutHeroImage from '../assets/images/about.jpg'; // Replace with the actual image path
-import features from '../assets/Data/FeaturesData'; // Import features data
+import aboutHeroImage from '../../public/assets/images/about.jpg'; // Replace with the actual image path
+import features from '../../public/assets/Data/FeaturesData'; // Import features data
 import Footer from '../components/Footer';
 
 const AboutUsPage = () => {
