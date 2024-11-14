@@ -13,6 +13,11 @@ import Quiz from './components/Quiz';
 
 import FlashcardTopicsPage from './pages/FlashcardPage';
 import FlashcardViewPage from './components/Flashcard';
+import AdminDashboard from './admin/AdminDashboard';
+import QuizManager from './admin/QuizManager';
+import CourseManager from './admin/CourseManager';
+import FlashcardManager from './admin/FlashcardManager';
+import AdminRoute from './context/AdminRoute';
 
 const App = () => {
   return (
@@ -27,6 +32,7 @@ const App = () => {
         <Route path="/quizzes" element={<QuizPage />} />
         <Route path="/flash-cards" element={<FlashcardTopicsPage />} />
         <Route path="/flashcards/:category/:topic" element={<FlashcardViewPage />} />
+        <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute> } />
         <Route
           path="/quizzes/:quizId"
           element={
@@ -41,6 +47,10 @@ const App = () => {
             </PrivateRoute>
           }
         />
+
+        <Route path="/admin/admin-quiz" element={<QuizManager />} />
+        <Route path="/admin/admin-courses" element={<CourseManager />} />
+        <Route path="/admin/admin-flashcards" element={<FlashcardManager />} />
       </Routes>
     </Router>
   );

@@ -1,13 +1,50 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import courseData from '../assets/Data/CourseData';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useAuth } from '../context/AuthContext';
+import { useState, useEffect } from 'react';
+import { database } from '../firebaseConfig';
+import { ref, onValue } from 'firebase/database';
 
 const CourseDetailsPage = () => {
     const { currentUser } = useAuth();
     const { courseId } = useParams();
-    const course = courseData.find((c) => c.id === parseInt(courseId));
+    const [course, setCourse] = useState(null);
+
+    // Function to convert YouTube URL to embed URL
+    const getEmbedUrl = (url) => {
+        if (!url) return '';
+        
+        // Handle different YouTube URL formats
+        let videoId = '';
+        
+        // Handle youtube.com/watch?v= format
+        if (url.includes('youtube.com/watch?v=')) {
+            videoId = url.split('watch?v=')[1].split('&')[0];
+        }
+        // Handle youtu.be/ format
+        else if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0];
+        }
+        // Handle youtube.com/embed/ format
+        else if (url.includes('youtube.com/embed/')) {
+            videoId = url.split('youtube.com/embed/')[1].split('?')[0];
+        }
+
+        // Return the embed URL if we found a video ID
+        return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    };
+
+    useEffect(() => {
+        const courseRef = ref(database, `courses/${courseId}`);
+        onValue(courseRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                setCourse({ id: courseId, ...data });
+            } else {
+                setCourse(null);
+            }
+        });
+    }, [courseId]);
 
     if (!currentUser) {
         return <Navigate to="/login" replace />;
@@ -27,6 +64,21 @@ const CourseDetailsPage = () => {
                     <h1 className="relative text-2xl md:text-4xl font-bold z-10">{course.title}</h1>
                 </section>
 
+                {/* Video Section */}
+                {course.videoUrl && (
+                    <section className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div className="aspect-w-16 aspect-h-9">
+                            <iframe
+                                src={getEmbedUrl(course.videoUrl)}
+                                className="w-full h-full"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                title={course.title}
+                            ></iframe>
+                        </div>
+                    </section>
+                )}
+
                 {/* Course Overview */}
                 <section className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg space-y-4">
                     <h2 className="text-3xl font-semibold text-gray-800">About This Course</h2>
@@ -44,7 +96,6 @@ const CourseDetailsPage = () => {
 
                 {/* Materials Navigator */}
                 <section className="space-y-4">
-
                     <h2 className="text-2xl font-semibold text-gray-800">Course Materials</h2>
                     {course.materials ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -57,7 +108,8 @@ const CourseDetailsPage = () => {
                                     </Link>
                                 </div>
                             ))}
-                        </div>) : (
+                        </div>
+                    ) : (
                         <p>No materials available for this course.</p>
                     )}
                 </section>

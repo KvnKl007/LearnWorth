@@ -1,23 +1,37 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import StudyMaterialCard from '../components/CourseCard/StudyMaterial';
-import courseData from '../assets/Data/CourseData';
 import AboutUs from '../components/About';
-import features from '../assets/Data/FeaturesData';
 import Footer from '../components/Footer';
+import { database } from '../firebaseConfig'; // Import Firebase config
+import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
+import features from '../assets/Data/FeaturesData';
 
 const Home = () => {
-    // Display only the first 3 courses as featured courses
-    const featuredCourses = courseData.slice(0, 3);
+    const [featuredCourses, setFeaturedCourses] = useState([]);
+
+    // Fetch courses from Firebase database
+    useEffect(() => {
+        const coursesRef = ref(database, 'courses');
+        
+        onValue(coursesRef, (snapshot) => {
+            const data = snapshot.val();
+            const coursesList = data ? Object.entries(data).map(([id, course]) => ({ id, ...course })) : [];
+
+            // Randomly select three courses
+            const randomCourses = coursesList.sort(() => 0.5 - Math.random()).slice(0, 3);
+            setFeaturedCourses(randomCourses);
+        });
+    }, []);
+
     return (
         <>
             <Navbar />
-            {/* home section */}
             <div className="flex flex-col items-center py-20 px-4 md:p-10 bg-white">
                 <Hero />
-                {/* float at the bottom of hero section */}
+                {/* Welcome Section */}
                 <section className="text-center bg-blue-600 text-white p-8 rounded-lg w-full max-w-3xl mb-8 shadow-md">
                     <h1 className="text-4xl font-bold mb-4">Welcome to LearnWorth</h1>
                     <p className="mb-6">Discover a wealth of study materials and take your learning to the next level!</p>
@@ -34,20 +48,22 @@ const Home = () => {
                 <section className="w-full max-w-4xl mt-16">
                     <h2 className="text-2xl font-bold mb-4 text-gray-700">Featured Study Materials</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {/* Sample Card */}
-                        {featuredCourses.map((course, index) => (
-                            <StudyMaterialCard
-                                key={index}
-                                thumbnail={course.thumbnail}
-                                title={course.title}
-                                description={course.description}
-                                link={`/courses/${course.id}`}
-                            />
-                        ))}
-
-                        {/* Repeat for more cards */}
+                        {featuredCourses.length > 0 ? (
+                            featuredCourses.map((course) => (
+                                <StudyMaterialCard
+                                    key={course.id}
+                                    thumbnail={course.thumbnail}
+                                    title={course.title}
+                                    description={course.description}
+                                    link={`/courses/${course.id}`}
+                                />
+                            ))
+                        ) : (
+                            <p className="text-center text-gray-500">Loading featured courses...</p>
+                        )}
                     </div>
                 </section>
+                
                 {/* Features Showcase */}
                 <section className="w-full bg-gray-50 py-12 mt-20">
                     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -63,7 +79,6 @@ const Home = () => {
             </div>
             <Footer />
         </>
-
     );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Navbar from '../components/Navbar';
 import aboutHeroImage from '../assets/images/about.jpg'; // Replace with the actual image path
 import features from '../assets/Data/FeaturesData'; // Import features data

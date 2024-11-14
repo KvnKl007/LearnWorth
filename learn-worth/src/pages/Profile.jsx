@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import {
     updateEmail,
@@ -7,7 +7,7 @@ import {
     deleteUser
 } from 'firebase/auth';
 import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
-import { auth, storage } from '../firebaseConfig';
+import { storage } from '../firebaseConfig';
 import Navbar from '../components/Navbar';
 import defaultImage from "../assets/images/default.png"
 import { useNavigate } from 'react-router-dom';
@@ -33,11 +33,11 @@ const Profile = () => {
         }
     }, [currentUser]);
 
-    const handleProfilePicChange = (e) => {
-        if (e.target.files[0]) {
-            setProfilePic(e.target.files[0]);
-        }
-    };
+    // const handleProfilePicChange = (e) => {
+    //     if (e.target.files[0]) {
+    //         setProfilePic(e.target.files[0]);
+    //     }
+    // };
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -98,6 +98,7 @@ const Profile = () => {
             navigate('/'); // Redirect to login page after logout
         } catch (error) {
             setError("Error logging out");
+            console.error("Error logging out account:", error)
         }
     };
     const handleDeleteAccount = async () => {

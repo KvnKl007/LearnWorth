@@ -1,15 +1,25 @@
-// src/pages/FlashcardViewPage.jsx
-
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import flashcardData from '../assets/Data/FlashCardData';
+import { useState, useEffect } from 'react';
+import { database } from '../firebaseConfig'; // Import Firebase config
+import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
+import { useParams } from 'react-router-dom'; // Import useParams to get the topic from the URL
 import Navbar from './Navbar';
 
 const FlashcardViewPage = () => {
-    const { category, topic } = useParams();
-    const flashcards = flashcardData[category]?.[topic] || [];
+    const { topic } = useParams(); // Get the topic from the URL
+    const [flashcards, setFlashcards] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [flipped, setFlipped] = useState(false);
+
+    // Fetch flashcards for the specific topic from the database
+    useEffect(() => {
+        const flashcardsRef = ref(database, 'flashcards'); // Adjust the path to your flashcards in the database
+        onValue(flashcardsRef, (snapshot) => {
+            const data = snapshot.val();
+            const flashcardsList = data ? Object.entries(data).map(([id, flashcard]) => ({ id, ...flashcard })) : [];
+            const filteredFlashcards = flashcardsList.filter(flashcard => flashcard.topic === topic);
+            setFlashcards(filteredFlashcards); // Update state with fetched flashcards for the specific topic
+        });
+    }, [topic]);
 
     // Ensure there's a valid flashcard to display
     if (flashcards.length === 0) {
@@ -24,23 +34,24 @@ const FlashcardViewPage = () => {
     const handleFlip = () => setFlipped(!flipped);
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards[0].questions.length);
         setFlipped(false); // Reset flip state when navigating
     };
 
     const handlePrevious = () => {
         setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? flashcards.length - 1 : prevIndex - 1
+            prevIndex === 0 ? flashcards[0].questions.length - 1 : prevIndex - 1
         );
         setFlipped(false); // Reset flip state when navigating
     };
 
-    const currentFlashcard = flashcards[currentIndex];
+    const currentQuestion = flashcards[0].questions[currentIndex];
+    const currentAnswer = flashcards[0].answers[currentIndex];
 
     return (
         <>
             <Navbar />
-            <div className="container mx-auto p-6 space-y-10 mt-14">
+            <div className="container mx-auto p-6 space-y-10 mt-16">
                 {/* Hero Section */}
                 <section className="relative h-72 bg-blue-600 text-white flex items-center justify-center rounded-lg shadow-lg">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600 opacity-80"></div>
@@ -54,13 +65,13 @@ const FlashcardViewPage = () => {
                         >
                             {/* Front of the Card (Question) */}
                             <div className="flashcard-face flashcard-front">
-                                <p className="flashcard-text">{currentFlashcard.question}</p>
+                                <p className="flashcard-text">{currentQuestion}</p>
                                 <button className="flip-button">Show Answer</button>
                             </div>
 
                             {/* Back of the Card (Answer) */}
                             <div className="flashcard-face flashcard-back">
-                                <p className="flashcard-text">{currentFlashcard.answer}</p>
+                                <p className="flashcard-text">{currentAnswer}</p>
                                 <button className="flip-button">Show Question</button>
                             </div>
                         </div>
@@ -77,7 +88,6 @@ const FlashcardViewPage = () => {
                     </div>
                 </section>
             </div>
-
         </>
     );
 };

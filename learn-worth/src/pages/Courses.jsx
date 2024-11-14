@@ -1,18 +1,30 @@
-// CoursesPage.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StudyMaterialCard from '../components/CourseCard/StudyMaterial';
 import Navbar from '../components/Navbar';
-import courseData from '../assets/Data/CourseData';
+// import courseData from '../assets/Data/CourseData'; // This will be replaced
 import Footer from '../components/Footer';
+import { database } from '../firebaseConfig'; // Import Firebase config
+import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
 
 const categories = ['All', 'Mathematics', 'Science', 'Computer Science'];
 
 const CoursesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [courses, setCourses] = useState([]); // State to hold courses
+
+    // Fetch courses from the database
+    useEffect(() => {
+        const coursesRef = ref(database, 'courses');
+        onValue(coursesRef, (snapshot) => {
+            const data = snapshot.val();
+            const coursesList = data ? Object.entries(data).map(([id, course]) => ({ id, ...course })) : [];
+            setCourses(coursesList); // Update state with fetched courses
+        });
+    }, []);
 
     // Filter courses based on search term and selected category
-    const filteredCourses = courseData.filter(course => {
+    const filteredCourses = courses.filter(course => {
         const matchesCategory = selectedCategory === 'All' || course.category === selectedCategory;
         const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCategory && matchesSearch;
@@ -21,7 +33,7 @@ const CoursesPage = () => {
     return (
         <>
             <Navbar />
-            <section className="w-full max-w-5xl mx-auto p-6 space-y-8">
+            <section className="w-full max-w-5xl mx-auto p-6 space-y-8 mb-48">
                 {/* Search and Categories */}
                 <div className="space-y-4 mt-20">
                     <h2 className="text-3xl font-bold text-blue-600 ">Explore Our Courses</h2>

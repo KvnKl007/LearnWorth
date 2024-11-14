@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import quizQuestionsData from "../assets/Data/QuizData";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
+// import quizQuestionsData from "../assets/Data/QuizData"; // This will be replaced
 import Navbar from "../components/Navbar";
 import QuizResult from "../components/QuizResult";
 import { useAuth } from "../context/AuthContext";
+import { database } from '../firebaseConfig'; // Import Firebase config
+import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
 
 const Quiz = () => {
     const { currentUser } = useAuth();
     const { quizId } = useParams();
-    const questions = quizQuestionsData[quizId] || [];
+    const [questions, setQuestions] = useState([]);
     const [userAnswers, setUserAnswers] = useState({});
     const [showResults, setShowResults] = useState(false);
     const [score, setScore] = useState(0);
@@ -17,6 +19,16 @@ const Quiz = () => {
     if (!currentUser) {
         return <Navigate to="/login" replace />;
     }
+
+    // Fetch quiz questions from the database
+    useEffect(() => {
+        const questionsRef = ref(database, `quizzes/${quizId}/questions`); // Adjust the path to your questions in the database
+        onValue(questionsRef, (snapshot) => {
+            const data = snapshot.val();
+            const questionsList = data ? Object.entries(data).map(([id, question]) => ({ id, ...question })) : [];
+            setQuestions(questionsList); // Update state with fetched questions
+        });
+    }, [quizId]);
 
     const handleAnswerChange = (questionId, answer) => {
         setUserAnswers((prevAnswers) => ({
@@ -38,6 +50,10 @@ const Quiz = () => {
         setUserAnswers({});
         setScore(0);
         setShowResults(false);
+    };
+
+    const handleNextQuiz = () => {
+        navigate('/quizzes'); // Replace with the actual path to the next quiz
     };
 
     return (
@@ -80,7 +96,7 @@ const Quiz = () => {
                         score={score}
                         totalQuestions={questions.length}
                         onRetry={resetQuiz}
-                        onBack={() => navigate(-1)}
+                        onBack={handleNextQuiz}
                     />
                 )}
             </section>

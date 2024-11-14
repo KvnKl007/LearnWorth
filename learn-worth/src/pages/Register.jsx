@@ -1,5 +1,5 @@
 // src/components/Register.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';

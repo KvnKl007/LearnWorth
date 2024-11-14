@@ -1,9 +1,10 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Footer = () => {
+    const { isAdmin } = useAuth();
     return (
         <>
             <footer className="bg-gray-900 text-gray-300 py-10 relative">
@@ -65,6 +66,9 @@ const Footer = () => {
                             </a>
                         </div>
                     </div>
+                    <Link to={isAdmin ? '/admin' : '/login'} className='text-gray-400 hover:text-white'>
+                        Admin
+                    </Link>
                 </div>
 
                 {/* Bottom Line */}

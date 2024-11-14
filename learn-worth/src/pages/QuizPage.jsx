@@ -1,27 +1,41 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import quizData from "../assets/Data/QuizListData";
+// import quizData from "../assets/Data/QuizListData"; // This will be replaced
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import { database } from '../firebaseConfig'; // Import Firebase config
+import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
 
 const categories = ["All", "Finance", "Mathematics", "Computer Science"];
 
 const QuizPage = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [quizzes, setQuizzes] = useState([]); // State to hold quizzes
     const navigate = useNavigate();
+
+    // Fetch quizzes from the database
+    useEffect(() => {
+        const quizzesRef = ref(database, 'quizzes'); // Adjust the path to your quizzes in the database
+        onValue(quizzesRef, (snapshot) => {
+            const data = snapshot.val();
+            const quizzesList = data ? Object.entries(data).map(([id, quiz]) => ({ id, ...quiz })) : [];
+            setQuizzes(quizzesList); // Update state with fetched quizzes
+        });
+    }, []);
+
     const handleQuizStart = (quizId) => {
         navigate(`/quizzes/${quizId}`);
     };
 
     // Filter quizzes based on selected category
-    const filteredQuizzes = quizData.filter(quiz =>
+    const filteredQuizzes = quizzes.filter(quiz =>
         selectedCategory === "All" ? true : quiz.category === selectedCategory
     );
 
     return (
         <>
             <Navbar />
-            <section className="w-full max-w-5xl mx-auto p-6 space-y-8 mt-20">
+            <section className="w-full max-w-5xl mx-auto p-6 space-y-8 mt-20 mb-64">
                 <h2 className="text-3xl font-bold text-blue-600">Choose a Quiz</h2>
 
                 {/* Category Filter */}
@@ -65,12 +79,6 @@ const QuizPage = () => {
             <Footer />
         </>
     );
-};
-
-// Placeholder function for starting a quiz
-const handleQuizStart = (quizId) => {
-    console.log(`Starting quiz with ID: ${quizId}`);
-    // Here, we’ll navigate to the QuizDetailPage with the quiz ID
 };
 
 export default QuizPage;
