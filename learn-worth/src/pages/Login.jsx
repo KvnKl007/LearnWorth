@@ -25,7 +25,7 @@ const Login = () => {
             {/* Left Side - Image */}
             <div className="hidden md:flex flex-1 items-center justify-center bg-blue-600">
                 <img
-                    src="/public/assets/images/Signin.jpg"
+                    src="/assets/images/Signin.jpg"
                     alt="Showcase of LearnWorth"
                     className="w-full h-full object-cover"
                 />
