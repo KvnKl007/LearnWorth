@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import { database } from '../firebaseConfig'; // Import Firebase config
 import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
 
-const categories = ['All', 'Mathematics', 'Science', 'Computer Science'];
+const categories = ['All', 'Investment', 'Savings', 'Taxes'];
 
 const CoursesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');

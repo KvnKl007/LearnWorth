@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { database } from '../firebaseConfig'; // Import Firebase config
 import { ref, onValue } from 'firebase/database'; // Import necessary Firebase functions
 
-const categories = ["All", "Finance", "Mathematics", "Computer Science"];
+const categories = ["All", "Investment", "Savings", "Taxes"];
 
 const QuizPage = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
